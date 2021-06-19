@@ -10,6 +10,7 @@ def Get_img(data):
     # 判断待会如果要保存的文件夹已经存在则删除该文件夹
     path = os.path.join(data, user_id)
     if os.path.isdir(path):
+
         shutil.rmtree(path)
     # 创建一个文件夹
     os.mkdir(path)
