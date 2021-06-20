@@ -80,9 +80,9 @@ def Train_img(data):
                 lables.append(label)
             label += 1
         # 转换数据进行格式长度转换 8位数据矩阵
-        X = np.asarray(imgs)
-        y = np.asarray(lables)
-        return X, y, face_list
+     X = np.asarray(imgs)
+     y = np.asarray(lables)
+     return X, y, face_list
 
 
 def True_tain_face(data):
