@@ -1,5 +1,5 @@
 # face_recognition
-<h1>这是一个基于opencv的人脸识别项目</h1>
+<h1>这是两个基于opencv的人脸识别项目</h1>
 
 <h3>人脸识别项目一：face_text_over.py</h3>
 <div>在使用这个人脸识别功能之前，你需要安装能够运行该项目的环境</div>
