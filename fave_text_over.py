@@ -79,10 +79,10 @@ def Train_img(data):
                 imgs.append(gray_img)
                 lables.append(label)
             label += 1
-        # 转换数据进行格式长度转换 8位数据矩阵
-     X = np.asarray(imgs)
-     y = np.asarray(lables)
-     return X, y, face_list
+        # 转换数据进行格式长度转换数据矩阵
+    X = np.asarray(imgs)
+    y = np.asarray(lables)
+    return X, y, face_list
 
 
 def True_tain_face(data):
@@ -131,5 +131,5 @@ def True_tain_face(data):
 
 if __name__ == '__main__':
     data = './img'
-    Get_img(data)
+    #Get_img(data)
     True_tain_face(data)

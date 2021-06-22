@@ -10,7 +10,7 @@ from sklearn.linear_model import Lasso
 from sklearn.model_selection import GridSearchCV
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVR
+from sklearn.svm import SVC
 # 创建文件夹包含了图片的数据
 def Get_img(data):
     # 加载脸的xml文件,用于后面判断人脸
@@ -87,8 +87,7 @@ def Get_document():
         imgs = cv2.imread(face, 0)
         image.append(imgs)
         label.append(int(index / 10))
-    print(len(label))
-    print(len(image))
+    print('文件夹里图片的个数：',len(image))
     print(label)
     return image,label,face_list
 def data():
@@ -98,11 +97,11 @@ def data():
     for images in image:
         data = images.flatten()
         image_data.append(data)
-    print(image_data[0].shape)
+    print('一张图片的数据维度：',image_data[0].shape)
     # 转换为np数组
     X = np.array(image_data)
     y = np.array(label)
-    print(X.shape)
+    print('转换为np数组后的维数：',X.shape)
     return X,y
 # 划分训练集和测试集
 def train_data():
@@ -114,12 +113,15 @@ def train_data():
     # 打印降维后的形态
     x_train_pca = pca.transform(X_train)
     x_test_pca = pca.transform(X_test)
-    print(x_train_pca.shape)
-    print(x_test_pca.shape)
+    print('降到了100维后的数据维数X_train：',x_train_pca.shape)
+    print('降到了100维后的数据维数X_test：',x_test_pca.shape)
     # 查看降维后的特征是所携带的原始数据的多少
     prefe = pca.explained_variance_ratio_.sum()
     print('降维后保留的原始特征数：', prefe)
-        # 训练数据
+    #交叉验证
+    svc=SVC(kernel='linear')
+    scores=cross_val_score(svc,x_train_pca,y_train,cv=4)
+    print('交叉验证的平均分为：',scores.mean())
     #获取训练后的数据
     model = cv2.face.EigenFaceRecognizer_create()
     model.train(x_train_pca, y_train)
@@ -153,7 +155,7 @@ def predict_img(document_img):
     test=pca.transform(ret)
     print(test[0].shape)
     res=model.predict(test)
-    print(res[0])
+    print('预测的结果为与第{:}个文件夹里面的人物最为相似。。。'.format(res[0]))
 
 if __name__=="__main__":
     #Get_img('./img')
